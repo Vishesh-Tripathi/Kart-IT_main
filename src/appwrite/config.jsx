@@ -4,8 +4,8 @@ import conf from "../conf/conf";
 export class Service{
     client=new Client();
     databases;
-    avatar;
-    storage;
+  
+  
  
    
 
@@ -44,23 +44,10 @@ export class Service{
                 console.log("error in adding docs");
             }
         }
-        async getImage({picture}){
-            try {
-                 return await this.storage.createFile(
-                    conf.appwritebucketid,
-                    ID.unique(),
-                    { 
-                        picture,
-                    }
-                 )
-                
-            } catch (error) {
-                console.log(error)
-            }
-
-        }
+        
 
         async productdetails(){
+            
             try{
                 return await this.databases.listDocuments(
                     conf.appwriteDBid,
@@ -71,6 +58,54 @@ export class Service{
                 console.log("not able to fetch data");
             }
         }
+        async singledatafetch(id){
+            try{
+                return await this.databases.listDocuments(
+                    conf.appwriteDBid,
+                    conf.appwritecollectionid,
+                    [Query.equal(`$id`,id)],
+                )
+                // console.log(a);
+            }catch(error){
+                console.log("not able to fetch data");
+            }
+        }
+        async Updatedoc(id,{title,price,productImageUrl,category,description,quantity,time,date}){
+            try{
+                return await this.databases.updateDocument(
+                    conf.appwriteDBid,
+                    conf.appwritecollectionid,
+                    id,
+                    {
+                        title,
+                        price,
+                        productImageUrl,
+                        category,
+                        description,
+                        quantity,
+                        time,
+                        date,   
+                    }
+                )
+            }catch(error){
+                console.log("not able to update data");
+            }
+        }
+
+        async deletedoc(id){
+            try{
+                return await this.databases.deleteDocument(
+                    conf.appwriteDBid,
+                    conf.appwritecollectionid,
+                    id
+                );
+            }catch(error){
+                console.log("not deletable");
+            }
+        }
+
+       
+    //  storage = new Storage(this.client)
 }
 
 const service=new Service();

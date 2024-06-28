@@ -10,7 +10,7 @@ import { useEffect } from "react";
 const category = [
     {
         image: 'https://cdn-icons-png.flaticon.com/256/4359/4359963.png',
-        name: 'fashion'
+        name: 'Fashion'
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/11833/11833323.png',
@@ -22,11 +22,11 @@ const category = [
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/7648/7648246.png',
-        name: 'mobile'
+        name: 'Mobile'
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/12142/12142416.png',
-        name: 'laptop'
+        name: 'Electronics'
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/10686/10686553.png',
@@ -34,7 +34,7 @@ const category = [
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/12114/12114279.png',
-        name: 'home'
+        name: 'Home & Furniture'
     },
     {
         image: 'https://cdn-icons-png.flaticon.com/256/11946/11946316.png',
@@ -43,6 +43,7 @@ const category = [
 ]
 
 const Category = () => {
+    const navigate=useNavigate();
     const cartitems = useSelector((state)=> state.cart);
     const dispatch = useDispatch();
 
@@ -71,7 +72,7 @@ const Category = () => {
                             return (
                                 <div key={index} className="px-3 lg:px-10">
                                     {/* Image  */}
-                                    <div className="  mt-4 w-16 h-16 lg:w-24 lg:h-24 max-w-xs rounded-full  bg-blue-600 transition-all hover:bg-blue-800  hover:scale-125 duration-300 cursor-pointer mb-1 " >
+                                    <div onClick={() => navigate(`/category/${item.name}`)}  className="  mt-4 w-16 h-16 lg:w-24 lg:h-24 max-w-xs rounded-full  bg-blue-600 transition-all hover:bg-blue-800  hover:scale-125 duration-300 cursor-pointer mb-1 " >
                                         <div className="flex justify-center mb-12">
                                             {/* Image tag  */}
                                             <img src={item.image} alt="img" />
